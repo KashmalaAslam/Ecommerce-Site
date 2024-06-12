@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add to Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="include.js"></script>
+    <style>
+      #cart-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .cart-container {
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body class="font-sans">
+    <div id="header-container"></div>
+    <div class="container mx-auto p-4">
+      <div
+        id="card-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      ></div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div
+      id="cart-overlay"
+      class="fixed inset-0 flex items-center justify-center z-50 hidden"
+    >
+      <div
+        class="cart-container bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2"
+      >
+        <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+        <div id="cart-items" class="mb-4"></div>
+        <div class="buttons">
+          <button
+            class="bg-red-500 text-white px-4 py-2 rounded"
+            onclick="toggleCartOverlay()"
+          >
+            Close Cart
+          </button>
+          <a href="checkout.html">
+            <button class="bg-stone-800 text-white px-4 py-2 rounded">
+              Check Out
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const cardData = [
+        {
+          id: 1,
+          title: "Winter Jacket",
+          content: "High-quality winter jacket to keep you warm.",
+          imageUrl: "/Frontend/images/card1.jpg",
+          price: "$99.99",
+        },
+        {
+          id: 2,
+          title: "Snow Boots",
+          content: "Durable snow boots for harsh weather conditions.",
+          imageUrl: "/Frontend/images/card2.jpg",
+          price: "$79.99",
+        },
+        {
+          id: 3,
+          title: "Woolen Scarf",
+          content: "Cozy woolen scarf for winter.",
+          imageUrl: "/Frontend/images/card3.jpg",
+          price: "$19.99",
+        },
+        {
+          id: 4,
+          title: "Elegant Coats",
+          content: "We have best fashioned coats.",
+          imageUrl: "/Frontend/images/card4.jpg",
+          price: "$149.99",
+        },
+      ];
+
+      // Function to initialize items in local storage if not already set
+      function initializeItems() {
+        if (!localStorage.getItem("items")) {
+          localStorage.setItem("items", JSON.stringify(cardData));
+        }
+        if (!localStorage.getItem("cart")) {
+          localStorage.setItem("cart", "[]");
+        }
+      }
+
+      // Function to create a card element
+      function createCard({ id, title, content, imageUrl, price }) {
+        const card = document.createElement("div");
+        card.className = "card bg-white shadow-lg rounded-lg overflow-hidden";
+        card.setAttribute("data-id", id);
+
+        const cardImage = document.createElement("img");
+        cardImage.className = "card-image w-full h-64 object-cover";
+        cardImage.src = imageUrl;
+        cardImage.alt = title;
+
+        const cardBody = document.createElement("div");
+        cardBody.className = "p-4";
+
+        const cardTitle = document.createElement("h2");
+        cardTitle.className = "card-title text-xl font-bold mb-2";
+        cardTitle.textContent = title;
+
+        const cardContent = document.createElement("p");
+        cardContent.className = "text-gray-700";
+        cardContent.textContent = content;
+
+        const cardPrice = document.createElement("p");
+        cardPrice.className = "card-price text-lg font-semibold text-gray-900";
+        cardPrice.textContent = price;
+
+        const cartButton = document.createElement("button");
+        cartButton.className =
+          "rounded-xl bg-blue-500 text-white text-xl px-3 py-1 my-4 add-to-cart";
+        cartButton.textContent = "Add to Cart";
+        cartButton.setAttribute("data-id", id);
+
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardContent);
+        cardBody.appendChild(cardPrice);
+        cardBody.appendChild(cartButton);
+
+        card.appendChild(cardImage);
+        card.appendChild(cardBody);
+
+        return card;
+      }
+
+      // Function to render cards
+      function renderCards(data) {
+        const cardContainer = document.getElementById("card-container");
+        cardContainer.innerHTML = "";
+        data.forEach((item) => {
+          const card = createCard(item);
+          cardContainer.appendChild(card);
+        });
+        setupAddToCartButtons();
+      }
+
+      // Load items from local storage and render cards on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        initializeItems();
+        const items = JSON.parse(localStorage.getItem("items")) || [];
+        renderCards(items);
+        initializeCartFunctionality();
+      });
+
+      // Function to initialize cart functionality
+      function initializeCartFunctionality() {
+        const cartLink = document.getElementById("cart");
+        if (cartLink) {
+          cartLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            toggleCartOverlay();
+          });
+        }
+        setupAddToCartButtons();
+        updateCartCount();
+        updateCartOverlay();
+      }
+
+      // Function to handle add-to-cart button click
+      function setupAddToCartButtons() {
+        const cartButtons = document.querySelectorAll(".add-to-cart");
+        cartButtons.forEach((button) => {
+          button.addEventListener("click", addToCart);
+        });
+      }
+
+      function addToCart(event) {
+        event.preventDefault();
+        const itemElement = event.target.closest(".card");
+        const itemTitle = itemElement.querySelector(".card-title").textContent;
+        const itemPrice = itemElement.querySelector(".card-price").textContent;
+        const itemImageUrl = itemElement.querySelector(".card-image").src;
+        const itemId = event.target.getAttribute("data-id");
+        addItemToCart(itemTitle, itemPrice, itemImageUrl, itemId);
+      }
+
+      function addItemToCart(title, price, imageUrl, id) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const item = cart.find((item) => item.title === title);
+        if (item) {
+          item.quantity++;
+        } else {
+          const product = cardData.find((item) => item.id == id);
+          cart.push({ ...product, id, title, price, imageUrl, quantity: 1 });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        updateCartOverlay();
+      }
+
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+        document.getElementById("cart-count").textContent = cartCount;
+      }
+
+      function updateCartOverlay() {
+        const cartItemsContainer = document.getElementById("cart-items");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cartItemsContainer.innerHTML = "";
+        cart.forEach((item, index) => {
+          const cartItem = document.createElement("div");
+          cartItem.className =
+            "cart-item flex justify-between items-center p-4 border-b";
+          cartItem.innerHTML = `
+                    <div class="flex-1 ml-4">
+                        <h4 class="text-lg font-semibold">${item.title}</h4>
+                        <p class="text-sm text-gray-600">${item.price}</p>
+                    </div>
+                    <div class="flex items-center">
+                        <button class="increase-quantity mx-4 font-bold text-xl" data-index="${index}">+</button>
+                        <span class="text-lg font-semibold">${item.quantity}</span>
+                        <button class="decrease-quantity mx-4 font-bold text-xl" data-index="${index}">-</button>
+                    </div>
+                `;
+          cartItemsContainer.appendChild(cartItem);
+        });
+
+        document.querySelectorAll(".increase-quantity").forEach((button) => {
+          button.addEventListener("click", increaseQuantity);
+        });
+
+        document.querySelectorAll(".decrease-quantity").forEach((button) => {
+          button.addEventListener("click", decreaseQuantity);
+        });
+      }
+
+      function increaseQuantity(event) {
+        const index = event.target.dataset.index;
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart[index].quantity++;
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        updateCartOverlay();
+      }
+
+      function decreaseQuantity(event) {
+        const index = event.target.dataset.index;
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart[index].quantity > 1) {
+          cart[index].quantity--;
+        } else {
+          cart.splice(index, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        updateCartOverlay();
+      }
+
+      function toggleCartOverlay() {
+        const cartOverlay = document.getElementById("cart-overlay");
+        cartOverlay.classList.toggle("hidden");
+        if (!cartOverlay.classList.contains("hidden")) {
+          updateCartOverlay();
+        }
+      }
+
+      // CheckOut Page
+      function displayCartItemsOnCheckoutPage() {
+        const cartItemsContainer = document.querySelector(".cartItems");
+        const subtotal = document.getElementById("Subtotal");
+        const shippingFee = "$8.00";
+        const total = document.getElementById("total");
+        if (!cartItemsContainer) return;
+
+        cartItemsContainer.innerHTML = "";
+        let totalAmount = 0;
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.forEach((item) => {
+          const cartItem = document.createElement("div");
+          cartItem.className =
+            "cart-item flex justify-between items-center p-4 border-b";
+          cartItem.innerHTML = `
+                    <img src="${item.imageUrl}" alt="${item.title}" class="w-16 h-16 object-cover">
+                    <div class="flex-1 ml-4">
+                        <h4 class="text-lg font-semibold">${item.title}</h4>
+                        <p class="text-sm text-gray-600">${item.price}</p>
+                        <span class="text-lg font-semibold">Quantity: ${item.quantity}</span>
+                    </div>
+                `;
+          cartItemsContainer.appendChild(cartItem);
+
+          // Calculate the total amount
+          const itemPrice = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
+          totalAmount += itemPrice * item.quantity;
+        });
+
+        subtotal.innerText = `$${totalAmount.toFixed(2)}`;
+        const amount =
+          totalAmount + parseFloat(shippingFee.replace(/[^0-9.-]+/g, ""));
+        total.innerText = `$${amount.toFixed(2)}`;
+      }
+    </script>
+    <div id="footer-container"></div>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="include.js"></script>
+  </head>
+  <body class="lg:overflow-hidden">
+    <div id="header-container"></div>
+    <div class="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4 my-24">
+      <div>
+        <img src="/Frontend/images/login.jpg" alt="" />
+      </div>
+      <div class="container mt-14">
+        <div
+          class="relative mx-auto w-full max-w-xl bg-white px-6 py-10 sm:rounded-xl sm:px-10 ring-1 ring-black pb-16"
+        >
+          <div class="w-full">
+            <div class="text-center">
+              <h1 class="text-3xl font-bold text-black">Sign in</h1>
+              <p class="mt-2 text-gray-700">
+                Sign in below to access Admin Panel
+              </p>
+            </div>
+            <div id="alert" class="my-14 text-red-500 text-xl"></div>
+            <div class="mt-5">
+              <form class="space-y-8" id="signInForm">
+                <div class="relative mt-6">
+                  <label for="email" class="flex items-center text-black">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      class="h-5 w-5 text-orange-500"
+                    >
+                      <path
+                        d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"
+                      />
+                    </svg>
+                    <span class="ml-2">Email Address</span>
+                  </label>
+                  <div
+                    class="input-container mt-1 w-full border-b-2 border-gray-300"
+                  >
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      required
+                      placeholder="Email Address"
+                      class="w-full px-2 placeholder-gray-500 focus:border-orange-500 focus:outline-none py-4"
+                      autocomplete="email"
+                    />
+                  </div>
+                </div>
+                <div class="relative mt-6">
+                  <label for="password" class="flex items-center text-black">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                      class="h-5 w-5 text-orange-500"
+                    >
+                      <path
+                        d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"
+                      />
+                    </svg>
+                    <span class="ml-2">Password</span>
+                  </label>
+                  <div
+                    class="input-container mt-1 w-full border-b-2 border-gray-300"
+                  >
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Password"
+                      required
+                      class="w-full px-2 py-1 placeholder-gray-500 focus:border-orange-500 focus:outline-none"
+                    />
+                  </div>
+                </div>
+                <div class="my-6">
+                  <button
+                    class="w-full rounded-md bg-orange-500 px-3 py-4 text-white hover:bg-orange-600 focus:bg-orange-600 focus:outline-none"
+                    onclick="validateData()"
+                  >
+                    Sign in
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Clear form fields when the page loads
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+
+        const signInForm = document.getElementById("signInForm");
+
+        signInForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          validateData();
+        });
+
+        function validateData() {
+          try {
+            const emailInput = document.getElementById("email").value;
+            const passwordInput = document.getElementById("password").value;
+            const errorAlert = document.getElementById("alert");
+
+            const adminEmail = "adminishere524@gmail.com";
+            const adminPassword = "crosscheck#55";
+
+            const localAdmin = "admin#1234@gmail.com";
+            const localPassword = "passvibe#44";
+
+            if (!emailInput || !passwordInput) {
+              errorAlert.innerText = "Both fields are required.";
+              throw new Error("Fields are empty");
+            }
+
+            // Corrected condition to require both pairs to match
+            if (
+              (emailInput !== adminEmail || passwordInput !== adminPassword) &&
+              (emailInput !== localAdmin || passwordInput !== localPassword)
+            ) {
+              errorAlert.innerText = "Invalid Email or Password";
+              throw new Error("Invalid credentials");
+            }
+
+            if (emailInput === localAdmin && passwordInput === localPassword) {
+              console.log("Verified...");
+              document.getElementById("email").value = "";
+              document.getElementById("password").value = "";
+              window.location.href = "admin.html";
+            } else {
+              console.log("Verified...");
+              document.getElementById("email").value = "";
+              document.getElementById("password").value = "";
+              window.location.href = "/Backend/public/index.html";
+            }
+          } catch (error) {
+            console.error(error.message);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

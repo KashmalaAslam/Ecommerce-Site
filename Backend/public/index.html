@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto mt-10">
+      <h1 class="text-3xl font-bold mb-5 text-center">Admin Panel</h1>
+
+      <!-- Add New Product Form -->
+      <div class="bg-white p-6 rounded shadow-md mb-6">
+        <h2 class="text-2xl mb-4">Add New Product</h2>
+        <form id="addProductForm">
+          <div class="mb-4">
+            <label class="block text-gray-700">Title</label>
+            <input
+              type="text"
+              id="title"
+              class="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Content</label>
+            <input
+              type="text"
+              id="content"
+              class="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Image URL</label>
+            <input
+              type="text"
+              id="imageUrl"
+              class="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Price</label>
+            <input
+              type="number"
+              id="price"
+              class="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Quantity</label>
+            <input
+              type="number"
+              id="quantity"
+              class="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <!-- CRUD Operation Buttons -->
+          <div
+            class="flex justify-between items-center bg-white p-6 rounded shadow-md mb-6"
+          >
+            <button
+              onclick="fetchProducts()"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Read Products
+            </button>
+            <button
+              onclick="addProduct()"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Add Product
+            </button>
+            <button
+              onclick="updateProduct()"
+              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Update Product
+            </button>
+            <button
+              onclick="deleteProduct()"
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Delete Product
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Product List -->
+      <div class="bg-white p-6 rounded shadow-md">
+        <h2 class="text-2xl mb-4">Product List</h2>
+        <table class="w-full table-auto">
+          <thead>
+            <tr>
+              <th class="px-4 py-2">ID</th>
+              <th class="px-4 py-2">Title</th>
+              <th class="px-4 py-2">Content</th>
+              <th class="px-4 py-2">Image URL</th>
+              <th class="px-4 py-2">Price</th>
+              <th class="px-4 py-2">Quantity</th>
+              <th class="px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productList">
+            <!-- Products will be injected here by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      function fetchProducts() {
+        fetch("http://localhost:5000/api/products")
+          .then((response) => response.json())
+          .then((data) => {
+            const productList = document.getElementById("productList");
+            data.forEach((product) => {
+              const row = document.createElement("tr");
+              Object.values(product).forEach((text) => {
+                const cell = document.createElement("td");
+                const textNode = document.createTextNode(text);
+                cell.appendChild(textNode);
+                row.appendChild(cell);
+              });
+              const actionCell = document.createElement("td");
+              const deleteButton = document.createElement("button");
+              deleteButton.textContent = "Delete";
+              deleteButton.onclick = function () {
+                deleteProduct(product.id); // Ensure you have a deleteProduct function defined
+              };
+              actionCell.appendChild(deleteButton);
+              row.appendChild(actionCell);
+              productList.appendChild(row);
+            });
+          })
+          .catch((error) => console.error("Error fetching products:", error));
+      }
+
+      function deleteProduct() {
+        const id = prompt("Enter the id you want to delete: ");
+        fetch(`http://localhost:5000/api/products/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.text())
+          .then((message) => {
+            alert(message);
+            fetchProducts(); // Refresh the product list
+          })
+          .catch((error) => console.error("Error deleting product:", error));
+      }
+
+      function addProduct() {
+        const title = document.getElementById("title").value.trim();
+        const content = document.getElementById("content").value.trim();
+        const imageUrl = document.getElementById("imageUrl").value.trim();
+        const price = document.getElementById("price").value.trim();
+        const quantity = document.getElementById("quantity").value.trim();
+
+        fetch("http://localhost:5000/api/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            content,
+            imageUrl,
+            price,
+            quantity,
+          }),
+        })
+          .then((response) => response.text())
+          .then((message) => {
+            alert(message);
+            fetchProducts(); // Refresh the product list
+          })
+          .catch((error) => console.error("Error adding product:", error));
+      }
+
+      function updateProduct() {
+        const id = prompt("Enter the Id: ");
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
+        const imageUrl = document.getElementById("imageUrl").value;
+        const price = document.getElementById("price").value;
+        const quantity = document.getElementById("quantity").value;
+
+        const productData = {
+          title,
+          content,
+          imageUrl,
+          price,
+          quantity,
+        };
+
+        fetch(`http://localhost:5000/api/products/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productData),
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        });
+
+        alert("Updated Data successfully!");
+      }
+    </script>
+  </body>
+</html>

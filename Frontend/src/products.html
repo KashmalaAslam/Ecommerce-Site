@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="include.js"></script>
+
+    <style>
+      /* Adjust spacing between stars */
+      .flex i {
+        margin-right: 2px; /* Adjust this value to control the spacing */
+      }
+
+      /* Apply flex layout to each section's container */
+      #shirts_container,
+      #pants_container,
+      #shoes_container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center items horizontally */
+      }
+
+      /* Styling for the "Sales" div */
+      .sales-heading {
+        background-color: darkslategray; /* Dark gray background */
+        color: white; /* White text color */
+        padding: 10px; /* Padding */
+        text-align: center; /* Center text */
+      }
+
+      /* Styling for the menu options */
+      #menu1 li a {
+        background-color: orange;
+        color: white;
+        padding: 15px;
+        margin: 5px;
+        padding-right: 20px;
+        padding-left: 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s; /* Smooth transition for hover */
+      }
+
+      /* Hover effect for menu options */
+      #menu1 li a:hover {
+        background-color: #666; /* Darker gray on hover */
+      }
+
+      /* Product card hover effect */
+      .product-card:hover {
+        transform: scale(1.05); /* Slightly enlarge the card */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow */
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+      }
+
+      /* Product card styling */
+      .product-card {
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+        width: calc(25% - 32px); /* 25% width for each card with some margin */
+        margin: 16px;
+      }
+
+      /* Styling for section separators */
+      section {
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 20px 0;
+        background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <div class="bg-white border-gray-200 dark:bg-gray-900">
+      <button
+        id="menu-toggle"
+        class="ml-5 block md:hidden bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium py-2 px-4 rounded"
+      >
+        Varieties
+      </button>
+      <ul
+        id="menu1"
+        class="hidden md:flex justify-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white bg-orange-500"
+      >
+        <li>
+          <a href="#sweaters">Sweaters</a>
+        </li>
+        <li>
+          <a href="#shirts">Shirts</a>
+        </li>
+        <li>
+          <a href="#coats">Coats</a>
+        </li>
+        <li>
+          <a href="#hoodie">Hoodies</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sweaters Section -->
+    <section id="sweaters">
+      <h2 class="text-2xl font-semibold text-center mb-7">Sweaters</h2>
+      <div class="flex flex-wrap justify-center" id="sweaters_container">
+        <!-- Sweaters Product cards will be generated here -->
+      </div>
+    </section>
+
+    <!-- Shirts Section -->
+    <section id="shirts">
+      <h2 class="text-2xl font-semibold text-center mb-7">Shirts</h2>
+      <div class="flex flex-wrap justify-center" id="shirts_container">
+        <!-- Shirts Product cards will be generated here -->
+      </div>
+    </section>
+
+    <!-- Pants Section -->
+    <section id="coats">
+      <h2 class="text-2xl font-semibold text-center mb-7">Coats</h2>
+      <div class="flex flex-wrap justify-center" id="pants_container">
+        <!-- Pants Product cards will be generated here -->
+      </div>
+    </section>
+
+    <!-- Shoes Section -->
+    <section id="hoodie">
+      <h2 class="text-2xl font-semibold text-center mb-7">Hoodies</h2>
+      <div class="flex flex-wrap justify-center" id="shoes_container">
+        <!-- Shoes Product cards will be generated here -->
+      </div>
+    </section>
+
+    <!-- ----------------------------------------- -->
+
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("menu");
+
+      menuToggle.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+
+      const menuItems = document.querySelectorAll("#menu li a");
+
+      menuItems.forEach((item) => {
+        item.addEventListener("click", (event) => {
+          event.preventDefault(); // Prevent default link behavior
+          const target = item.getAttribute("href"); // Get the href attribute value
+          scrollToSection(target); // Call function to scroll to the section
+        });
+      });
+
+      function scrollToSection(target) {
+        const section = document.querySelector(target); // Select the section based on the target
+        section.scrollIntoView({ behavior: "smooth" }); // Scroll to the section smoothly
+      }
+
+      // Product Data
+      const e_commerceCards = [
+        {
+          title: "Product 1",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card1.jpg",
+          category: "Sweaters",
+        },
+        {
+          title: "Product 2",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card2.jpg",
+          category: "Sweaters",
+        },
+        {
+          title: "Product 3",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card3.jpg",
+          category: "Sweaters",
+        },
+        {
+          title: "Product 4",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card4.jpg",
+          category: "Sweaters",
+        },
+        {
+          title: "Product 5",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card5.jpg",
+          category: "Shirts",
+        },
+        {
+          title: "Product 6",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card6.jpg",
+          category: "Shirts",
+        },
+        {
+          title: "Product 7",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card7.jpg",
+          category: "Shirts",
+        },
+        {
+          title: "Product 8",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card8.jpg",
+          category: "Shirts",
+        },
+        {
+          title: "Product 9",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card9.jpg",
+          category: "Pants",
+        },
+        {
+          title: "Product 10",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card10.jpg",
+          category: "Pants",
+        },
+        {
+          title: "Product 11",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card11.jpg",
+          category: "Pants",
+        },
+        {
+          title: "Product 12",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card12.jpg",
+          category: "Pants",
+        },
+        {
+          title: "Product 13",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card13.jpg",
+          category: "Shoes",
+        },
+        {
+          title: "Product 14",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card14.jpg",
+          category: "Shoes",
+        },
+        {
+          title: "Product 15",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card15.jpg",
+          category: "Shoes",
+        },
+        {
+          title: "Product 16",
+          text: "Description of product 1.",
+          price: 19.99,
+          rating: 4,
+          imageUrl: "/Frontend/images/All Products/card16.jpg",
+          category: "Shoes",
+        },
+      ];
+
+      function displayProducts(containerId, category, discount) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = ""; // Clear existing product cards
+
+        const filteredProducts = e_commerceCards.filter(
+          (product) => product.category === category
+        );
+
+        let row = null;
+        filteredProducts.forEach((product, index) => {
+          if (index % 4 === 0) {
+            row = document.createElement("div");
+            row.classList.add("flex", "flex-wrap", "justify-center");
+            container.appendChild(row);
+          }
+
+          createProductCard(row, product, discount);
+        });
+      }
+
+      // Function to create a product card and append it to the specified container
+      function createProductCard(container, product, discount) {
+        const card = document.createElement("div");
+        card.classList.add(
+          "product-card",
+          "p-7",
+          "mt-20",
+          "mx-4",
+          "w-[300px]",
+          "bg-white",
+          "border",
+          "border-gray-200",
+          "rounded-lg",
+          "shadow",
+          "dark:bg-gray-800",
+          "dark:border-gray-700"
+        );
+
+        const image = document.createElement("img");
+        image.src = product.imageUrl;
+        image.alt = product.title;
+        image.classList.add("rounded-t-lg");
+
+        const details = document.createElement("div");
+        details.classList.add("p-4");
+
+        const title = document.createElement("h2");
+        title.textContent = product.title;
+        title.classList.add(
+          "text-xl",
+          "font-semibold",
+          "text-gray-900",
+          "dark:text-white",
+          "mb-2"
+        );
+
+        const text = document.createElement("p");
+        text.textContent = product.text;
+        text.classList.add("text-gray-700", "dark:text-gray-300", "mb-2");
+
+        // Original price
+        const originalPrice = document.createElement("p");
+        originalPrice.textContent = `$${product.price.toFixed(2)}`;
+        originalPrice.classList.add("text-gray-500", "line-through", "mb-2");
+
+        // Discounted price
+        const discountedPrice = document.createElement("p");
+        const discountedPriceValue = product.price - product.price * discount; // Calculate discounted price
+        discountedPrice.textContent = `$${discountedPriceValue.toFixed(2)}`; // Display discounted price
+        discountedPrice.classList.add(
+          "text-gray-900",
+          "font-bold",
+          "text-lg",
+          "mb-2"
+        );
+
+        // Stars portion
+        const stars = document.createElement("div");
+        stars.classList.add("flex");
+        for (let i = 0; i < 5; i++) {
+          const star = document.createElement("i");
+          star.classList.add("fas", "fa-star", "w-4", "h-4", "text-yellow-300");
+          if (i >= product.rating) {
+            star.classList.add("opacity-50");
+          }
+          stars.appendChild(star);
+        }
+
+        const button = document.createElement("button");
+        button.textContent = "Add to Cart";
+        button.classList.add(
+          "bg-blue-500",
+          "text-white",
+          "font-bold",
+          "py-2",
+          "px-4",
+          "rounded",
+          "transition-colors",
+          "shadow",
+          "m-2"
+        );
+
+        // Hover effect
+        button.addEventListener("mouseover", () => {
+          button.style.backgroundColor = "white";
+          button.style.color = "#3B82F6";
+          button.style.border = "1px solid gray.";
+        });
+
+        button.addEventListener("mouseout", () => {
+          button.style.backgroundColor = "#3B82F6";
+          button.style.color = "white";
+        });
+
+        // button.addEventListener("click", () => {
+        //   addToCart(product, discountedPriceValue);
+        // });
+
+        details.appendChild(title);
+        details.appendChild(text);
+        details.appendChild(originalPrice);
+        details.appendChild(discountedPrice);
+        details.appendChild(stars);
+        // details.appendChild(button);
+
+        card.appendChild(image);
+        card.appendChild(details);
+
+        container.appendChild(card);
+      }
+
+      // Initial display on page load
+      displayProducts("sweaters_container", "Sweaters", 0.1); // Display Sweaters by default with 10% discount
+      displayProducts("shirts_container", "Shirts", 0.15); // Display Shirts with 15% discount
+      displayProducts("pants_container", "Pants", 0.2); // Display Pants with 20% discount
+      displayProducts("shoes_container", "Shoes", 0.05); // Display Shoes with 5% discount
+    </script>
+
+    <div id="footer-container"></div>
+    <!-- ----------------------------------------- -->
+  </body>
+</html>

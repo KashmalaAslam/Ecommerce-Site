@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <title>Ecommerce for Winter Collection</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      #menu-toggle:checked + #menu {
+        display: block;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ["Poppins", "sans-serif"],
+            poppins: ["Poppins", "sans-serif"],
+          },
+          screens: {
+            xs: "240px",
+            sm: "480px",
+            md: "768px",
+            lg: "976px",
+            xl: "1440px",
+          },
+        },
+        plugins: [],
+      };
+    </script>
+  </head>
+
+  <body class="font-sans">
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- About us -->
+    <section class="w-full overflow-hidden dark:bg-gray-900">
+      <div class="w-full mx-auto">
+        <!-- User Cover IMAGE -->
+        <img src="/Frontend/images/About-assets/hero-img.jpg" class="w-full" />
+
+        <!-- User Profile Image -->
+        <div class="w-full mx-auto flex justify-center">
+          <img
+            src="/Frontend/images/brands/about-us.png"
+            alt="User Profile"
+            class="rounded-full object-cover xl:w-[16rem] xl:h-[16rem] lg:w-[16rem] lg:h-[16rem] md:w-[12rem] md:h-[12rem] sm:w-[10rem] sm:h-[10rem] xs:w-[8rem] xs:h-[8rem] outline outline-2 outline-offset-2 outline-yellow-500 shadow-xl relative xl:bottom-[7rem] lg:bottom-[8rem] md:bottom-[6rem] sm:bottom-[5rem] xs:bottom-[4.3rem]"
+          />
+        </div>
+
+        <div
+          class="xl:w-[80%] lg:w-[90%] md:w-[94%] sm:w-[96%] xs:w-[92%] mx-auto flex flex-col gap-4 justify-center items-center relative xl:-top-[6rem] lg:-top-[6rem] md:-top-[4rem] sm:-top-[3rem] xs:-top-[2.2rem]"
+        >
+          <!-- FullName -->
+          <h1
+            class="text-center text-gray-800 dark:text-white text-4xl font-serif font-bold"
+          >
+            Snowy Swagger
+          </h1>
+          <!-- About -->
+          <p
+            class="w-full text-gray-700 dark:text-gray-400 text-xl text-pretty text-center mb-40"
+          >
+            Welcome to Snowy Swagger, where winter fashion meets quality and
+            style for both men and women. Here, we believe that the chill of
+            winter shouldn't compromise your fashion choices. That's why we're
+            dedicated to curating a collection that not only keeps you warm but
+            also elevates your style game to the next level. Our journey began
+            with a passion for blending functionality with fashion. We
+            understand the importance of staying cozy during the colder months
+            without sacrificing your unique sense of style. Each piece in our
+            collection is carefully selected to ensure the perfect balance of
+            warmth, comfort, and trend-setting design. What sets us apart is our
+            unwavering commitment to quality. We handpick fabrics that are not
+            only luxuriously soft but also durable enough to withstand the
+            winter elements. From luxurious wool coats to stylish knitwear,
+            every stitch is crafted with precision and attention to detail,
+            guaranteeing a wardrobe that lasts season after season.
+          </p>
+
+          <!-- FullName -->
+          <h1
+            class="text-center text-gray-800 dark:text-white text-4xl font-serif font-bold"
+          >
+            What's special about us?
+          </h1>
+          <!-- Cards -->
+          <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-5">
+              <div
+                class="relative w-full flex items-end justify-start text-left bg-cover bg-center"
+                style="
+                  height: 450px;
+                  background-image: url(/Frontend/images/About-assets/card_01.jpg);
+                "
+              >
+                <div
+                  class="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"
+                ></div>
+                <main class="p-5 z-10">
+                  <a
+                    href="#"
+                    class="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline"
+                    >Best Quality Clothes
+                  </a>
+                </main>
+              </div>
+
+              <div
+                class="relative w-full flex items-end justify-start text-left bg-cover bg-center"
+                style="
+                  height: 450px;
+                  background-image: url(/Frontend/images/About-assets/card_04.jpg);
+                "
+              >
+                <div
+                  class="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"
+                ></div>
+                <main class="p-5 z-10">
+                  <a
+                    href="#"
+                    class="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline"
+                    >Delicately Knitted Dresses
+                  </a>
+                </main>
+              </div>
+
+              <div
+                class="relative w-full flex items-end justify-start text-left bg-cover bg-center"
+                style="
+                  height: 450px;
+                  background-image: url(/Frontend/images/About-assets/card_03.jpg);
+                "
+              >
+                <div
+                  class="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"
+                ></div>
+                <main class="p-5 z-10">
+                  <a
+                    href="#"
+                    class="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline"
+                    >Customization is handy
+                  </a>
+                </main>
+              </div>
+
+              <div
+                class="relative w-full flex items-end justify-start text-left bg-cover bg-center"
+                style="
+                  height: 450px;
+                  background-image: url(/Frontend/images/About-assets/card_02.jpg);
+                "
+              >
+                <div
+                  class="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"
+                ></div>
+                <main class="p-5 z-10">
+                  <a
+                    href="#"
+                    class="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline"
+                    >Best Color Combinations
+                  </a>
+                </main>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Story -->
+    <div class="grid grid-cols-1 md:grid-cols-2 bg-gray-100 h-[80vh]">
+      <div class="bg-white p-12 md:p-24 flex justify-start items-center">
+        <img
+          src="/Frontend/images/About-assets/out-story.jpg"
+          class="w-full max-w-md"
+        />
+      </div>
+      <div class="md:order-first md:p-24 flex justify-end items-center">
+        <div class="max-w-md">
+          <div class="w-24 h-2 bg-yellow-800 mb-4"></div>
+          <h2
+            class="font-display font-bold text-2xl md:text-3xl lg:text-4xl mb-6"
+          >
+            Out Story
+          </h2>
+          <p
+            class="font-light text-gray-600 text-sm md:text-base mb-6 leading-relaxed bg-gray-100"
+          >
+            It all started with a love for cozy knits and a desire to share that
+            warmth with the world. Inspired by the beauty of the winter season
+            and the joy of bundling up in your favorite sweater, we set out to
+            create a collection that celebrates the magic of winter in all its
+            glory. <br />
+
+            From the very beginning, our focus has been on crafting garments
+            that not only look great but also feel amazing to wear. We believe
+            that when you're comfortable in what you're wearing, you exude
+            confidence and radiate style effortlessly. <br />
+
+            But our journey doesn't stop there. We're also committed to making a
+            positive impact on the world around us.
+          </p>
+          <a
+            href="/blog/my-third-big-post/"
+            class="inline-block border-2 border-yellow-800 font-light text-yellow-800 text-sm uppercase tracking-widest py-3 px-8 hover:bg-yellow-800 hover:text-white"
+            >Read more</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Mission -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <section id="new-features" class="py-8 bg-white sm:py-10 lg:py-16">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2
+            class="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl xl:text-5xl"
+          >
+            Our Vision
+          </h2>
+          <p class="mt-4 text-base leading-7 text-gray-600 sm:mt-8">
+            Elevate Your Style, Embrace Your Comfort
+          </p>
+        </div>
+        <div
+          class="grid grid-cols-1 mt-10 text-center sm:mt-16 sm:grid-cols-2 sm:gap-x-12 gap-y-12 md:grid-cols-3 md:gap-0 xl:mt-24"
+        >
+          <!-- Feature 1 -->
+          <div class="md:p-8 lg:p-14 flex flex-col justify-center items-center">
+            <div
+              class="w-14 h-14 rounded-full bg-purple-200 flex justify-center items-center"
+            >
+              <i class="fa-solid fa-person text-3xl text-gray-900"></i>
+            </div>
+            <h3 class="mt-12 text-xl font-bold text-gray-900">
+              Empower Personal Expression
+            </h3>
+            <p class="mt-5 text-base text-gray-600">
+              We believe that clothing is more than just fabric; it's a form of
+              self-expression that allows individuals to showcase their
+              creativity and individuality to the world.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="md:p-8 lg:p-14 md:border-l md:border-gray-200 flex flex-col justify-center items-center"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-teal-200 flex justify-center items-center"
+            >
+              <i
+                class="fa-solid fa-hand-holding-heart text-3xl text-gray-900"
+              ></i>
+            </div>
+            <h3 class="mt-12 text-xl font-bold text-gray-900">
+              Inspire Confidence:
+            </h3>
+            <p class="mt-5 text-base text-gray-600">
+              Whether you're stepping out for a night on the town or tackling a
+              busy day at work, we want you to feel confident, comfortable, and
+              empowered in what you wear.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="md:p-8 lg:p-14 md:border-l md:border-gray-200 flex flex-col justify-center items-center"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-yellow-200 flex justify-center items-center"
+            >
+              <i class="fa-solid fa-shield text-3xl text-gray-900"></i>
+            </div>
+            <h3 class="mt-12 text-xl font-bold text-gray-900">
+              Cultivate Community
+            </h3>
+            <p class="mt-5 text-base text-gray-600">
+              Our vision is to cultivate a global community of fashion
+              enthusiasts who share a passion for style, sustainability, and
+              positive change.
+            </p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div
+            class="md:p-8 lg:p-14 md:border-t md:border-gray-200 flex flex-col justify-center items-center"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-red-200 flex justify-center items-center"
+            >
+              <i class="fa-solid fa-cloud text-3xl text-gray-900"></i>
+            </div>
+            <h3 class="mt-12 text-xl font-bold text-gray-900">
+              Celebrate Diversity
+            </h3>
+            <p class="mt-5 text-base text-gray-600">
+              Diversity is at the heart of everything we do. Our vision is to
+              celebrate diversity in all its forms, from the people who wear our
+              clothing to the cultures.
+            </p>
+          </div>
+
+          <!-- Feature 5 -->
+          <div
+            class="md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t flex flex-col justify-center items-center"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-green-200 flex justify-center items-center"
+            >
+              <i class="fa-solid fa-pen-nib text-3xl text-gray-900"></i>
+            </div>
+            <h3 class="mt-12 text-xl font-bold text-gray-900">
+              Drive Innovation
+            </h3>
+            <p class="mt-5 text-base text-gray-600">
+              Innovation is key to our vision for the future of fashion. We are
+              committed to pushing the boundaries of design, technology.
+            </p>
+          </div>
+
+          <!-- Feature 6 -->
+          <div
+            class="md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t flex flex-col justify-center items-center"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-orange-200 flex justify-center items-center"
+            >
+              <i class="fa-solid fa-bolt text-3xl text-gray-900"></i>
+            </div>
+            <h3 class="mt-12 text-xl font-bold text-gray-900">
+              Inspire Change
+            </h3>
+            <p class="mt-5 text-base text-gray-600">
+              Ultimately, our vision is to inspire positive change in the
+              fashion industry and beyond. Whether it's through our sustainable
+              practices, our commitment to diversity and inclusion, or our
+              efforts to empower individuals.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Teams -->
+    <div class="container my-32 mx-auto md:px-6 sm:pl-12">
+      <section class="mb-32 text-center">
+        <h2 class="mb-12 text-3xl font-bold">
+          Meet the <u class="text-orange-500">Team</u>
+        </h2>
+
+        <div class="lg:gap-xl-12 grid gap-x-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="mb-12 lg:mb-0">
+            <img
+              class="mx-auto mb-6 rounded-lg shadow-lg dark:shadow-black/20 w-[150px]"
+              src="/Frontend/images/card2.jpg"
+              alt="avatar"
+            />
+            <h5 class="mb-4 text-lg font-bold">Alan Turing</h5>
+            <p class="mb-6">Frontend Developer</p>
+          </div>
+          <div class="mb-12 lg:mb-0">
+            <img
+              class="mx-auto mb-6 rounded-lg shadow-lg dark:shadow-black/20 w-[150px]"
+              src="/Frontend/images/card3.jpg"
+              alt="avatar"
+            />
+            <h5 class="mb-4 text-lg font-bold">Veronica Smith</h5>
+            <p class="mb-6">Backend Developer</p>
+          </div>
+          <div class="mb-12 md:mb-0">
+            <img
+              class="mx-auto mb-6 rounded-lg shadow-lg dark:shadow-black/20 w-[150px]"
+              src="/Frontend/images/offer1.jpg"
+              alt="avatar"
+            />
+            <h5 class="mb-4 text-lg font-bold">Tom Johnson</h5>
+            <p class="mb-6">Digital Marketing Analyst</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div id="footer-container"></div>
+
+    <script src="include.js"></script>
+  </body>
+</html>

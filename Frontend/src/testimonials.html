@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/Frontend/jquery.js"></script>
+    <script src="/Frontend/jquery.cycle.all.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".pics").cycle({
+          fx: "fade",
+          timeout: 3000,
+        });
+      });
+    </script>
+    <style>
+      #menu-toggle:checked + #menu {
+        display: block;
+      }
+    </style>
+    <title>Ecommerce for Winter Collection</title>
+  </head>
+
+  <body class="font-sans">
+    <!-- Header -->
+    <div id="header-container"></div>
+    <!-- Slider -->
+    <div class="pics">
+      <img src="/Frontend/images/testimonial_assets/1.png" alt="" />
+      <img src="/Frontend/images/testimonial_assets/2.png" alt="" />
+      <img src="/Frontend/images/testimonial_assets/3.png" alt="" />
+      <img src="/Frontend/images/testimonial_assets/4.png" alt="" />
+      <img src="/Frontend/images/testimonial_assets/5.png" alt="" />
+    </div>
+
+    <!-- We are known for -->
+    <div class="flex justify-center items-center mb-14">
+      <div class="w-6/12 justify-center">
+        <h2 class="my-8 text-2xl font-bold md:text-4xl text-center p-7">
+          We are well <span class="text-orange-500">renowned for</span>
+        </h2>
+        <p class="text-center">
+          We're also committed to making a positive impact on the world around
+          us. That's why sustainability and ethical practices are at the core of
+          everything we do.
+        </p>
+      </div>
+    </div>
+
+    <!-- Features section -->
+    <section class="bg-gray-200 py-20 overflow-hidden">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap -mx-4 mt-12">
+          <div class="w-full md:w-1/3 px-4 mb-8">
+            <div class="rounded-md bg-white shadow-md p-8">
+              <div class="text-4xl font-bold text-orange-500 mb-4">01</div>
+              <h3 class="text-2xl font-bold mb-4">Best Quality</h3>
+              <p class="text-gray-600 mb-4">
+                From the softness of our fabrics to the durability of our
+                stitching, every detail is carefully considered to ensure that
+                our clothing not only looks great but also stands the test of
+                time.
+              </p>
+            </div>
+          </div>
+          <div class="w-full md:w-1/3 px-4 mb-8">
+            <div class="rounded-md bg-white shadow-md p-8">
+              <div class="text-4xl font-bold text-orange-500 mb-4">02</div>
+              <h3 class="text-2xl font-bold mb-4">Knitted Clothes</h3>
+              <p class="text-gray-600 mb-4">
+                Whether you're layering up for a chilly day outdoors or lounging
+                by the fire, our knitted garments are sure to become wardrobe
+                favorites that you'll reach for again and again.
+              </p>
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/3 px-4 mb-8">
+            <div class="rounded-md bg-white shadow-md p-8">
+              <div class="text-4xl font-bold text-orange-500 mb-4">03</div>
+              <h3 class="text-2xl font-bold mb-4">Timeless Style</h3>
+              <p class="text-gray-600 mb-4">
+                Our brand is synonymous with timeless style. From classic
+                silhouettes to modern designs, our collection offers a range of
+                pieces that effortlessly blend sophistication with on-trend
+                appeal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What our customer says -->
+    <div class="grid overflow-x-hidden md:grid-cols-1 lg:grid-cols-2 gap-4">
+      <div class="mt-14 lg:w-1/2 w-full flex justify-center md:w-11/12">
+        <img
+          src="/Frontend/images/About-assets/it-is-not-only-us-removebg-preview.png"
+          alt=""
+          class="max-w-full h-auto"
+        />
+      </div>
+      <div
+        class="lg:w-1/2 w-full flex flex-col justify-center mt-20 md:mt-14 px-4"
+      >
+        <h2
+          class="my-8 text-2xl font-bold md:text-4xl mt-14 text-center lg:text-left"
+        >
+          It's not <span class="text-orange-500">just us!</span>
+        </h2>
+        <p class="lg:w-1/2 w-full mx-auto lg:mx-0">
+          We're also committed to making a positive impact on the world around
+          us. That's why sustainability and ethical practices are at the core of
+          everything we do. Our clients witness our dedication to this work.
+          They are the ones who encouraged us and make us believe in dreams.
+          We're a community of winter enthusiasts who share a love for fashion
+          and adventure. Whether you're hitting the slopes or strolling through
+          the city streets, our versatile pieces are designed to keep up with
+          your active lifestyle while keeping you looking effortlessly chic.
+        </p>
+      </div>
+    </div>
+
+    <section class="bg-white px-4 py-12 md:py-24 h-[100vh]">
+      <div class="max-w-screen-xl mx-auto">
+        <h2
+          class="font-black text-black text-center text-3xl leading-none uppercase max-w-2xl mx-auto mb-12"
+        >
+          What Listeners Are Saying
+        </h2>
+        <div
+          class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 relative"
+        >
+          <div class="bg-gray-200 rounded-lg p-8 text-center md:w-1/3">
+            <p class="font-bold uppercase">John Doe</p>
+            <p class="text-xl font-light italic text-gray-700">
+              This podcast is amazing! The storytelling and production quality
+              are top-notch. I can't wait for the next episode!
+            </p>
+            <div class="flex items-center justify-center space-x-2 mt-4">
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div class="bg-gray-200 rounded-lg p-8 text-center md:w-1/3">
+            <p class="font-bold uppercase">Jane Smith</p>
+            <p class="text-xl font-light italic text-gray-700">
+              This podcast kept me on the edge of my seat. It's a must-listen
+              for true crime enthusiasts!
+            </p>
+            <div class="flex items-center justify-center space-x-2 mt-4">
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div class="bg-gray-200 rounded-lg p-8 text-center md:w-1/3">
+            <p class="font-bold uppercase">Emily Johnson</p>
+            <p class="text-xl font-light italic text-gray-700">
+              I can't get enough of this podcast! The host's voice is so
+              soothing, and the stories are gripping. Highly recommend!
+            </p>
+            <div class="flex items-center justify-center space-x-2 mt-4">
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81 .588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                class="text-yellow-500 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81 .588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script src="include.js"></script>
+  </body>
+</html>

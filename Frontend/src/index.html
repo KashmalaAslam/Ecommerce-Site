@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/Frontend/jquery.js"></script>
+    <script src="/Frontend/jquery.cycle.all.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".pics").cycle({
+          fx: "scrollHorz",
+          timeout: 3000,
+        });
+      });
+    </script>
+    <style>
+      #menu-toggle:checked + #menu {
+        display: block;
+      }
+    </style>
+    <title>Ecommerce for Winter Collection</title>
+  </head>
+
+  <body class="font-sans">
+    <!-- Header -->
+    <div id="header-container"></div>
+    <!-- Slider -->
+    <section
+      class="dark:bg-gray-900 min-h-screen lg:min-h-screen sm:min-h-screen md:min-h-screen z-20 overflow-hidden"
+    >
+      <div class="flex h-full bg-gray-900">
+        <div class="w-full">
+          <div class="pics h-full bg-gray-900">
+            <div style="height: 100%; width: 100%">
+              <video
+                autoplay
+                loop
+                muted
+                plays-inline
+                class="bg-clip"
+                style="
+                  margin: 0;
+                  padding: 0;
+                  outline: none !important;
+                  border: none !important;
+                  opacity: 1.5;
+                "
+              >
+                <source
+                  src="/Frontend/Videos/ALL YOU WANT OS HERE.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <div style="height: 100%; width: 100%">
+              <video
+                autoplay
+                loop
+                muted
+                plays-inline
+                class="bg-clip"
+                style="
+                  margin: 0;
+                  padding: 0;
+                  outline: none;
+                  border: none;
+                  opacity: 1.5;
+                "
+              >
+                <source
+                  src="/Frontend/Videos/ALL YOU WANT IS HERE.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <div style="height: 100%; width: 100%">
+              <video
+                autoplay
+                loop
+                muted
+                plays-inline
+                class="bg-clip"
+                style="
+                  margin: 0;
+                  padding: 0;
+                  outline: none;
+                  border: none;
+                  opacity: 1.5;
+                "
+              >
+                <source
+                  src="/Frontend/Videos/Untitled design.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <div style="height: 100%; width: 100%">
+              <video
+                autoplay
+                loop
+                muted
+                plays-inline
+                class="bg-clip"
+                style="
+                  margin: 0;
+                  padding: 0;
+                  outline: none;
+                  border: none;
+                  opacity: 1.5;
+                "
+              >
+                <source
+                  src="/Frontend/Videos/Hero_Img_2.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <div style="height: 90vh; width: 100vw">
+              <video
+                autoplay
+                loop
+                muted
+                plays-inline
+                class="bg-clip"
+                style="
+                  margin: 0;
+                  padding: 0;
+                  outline: none;
+                  border: none;
+                  opacity: 1.5;
+                "
+              >
+                <source
+                  src="/Frontend/Videos/ALL YOU WANT OS HERE (1).mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- New In -->
+    <section
+      class="flex flex-col container items-start gap-28 mx-auto px-[10px]"
+    >
+      <div class="relative text-black mt-12">
+        <h2 class="text-4xl font-black md:text-5xl">NEW ARRIVALS</h2>
+      </div>
+      <div
+        class="grid grid-flow-row grid-row-1 gap-24 md:grid-flow-col md:grid-cols-3"
+      >
+        <!-- cards -->
+        <div class="flex flex-col w-full gap-7">
+          <img
+            class="w-full h-[704px] object-cover object-[34%] rounded-[20px]"
+            src="/Frontend/images/card1.jpg"
+          />
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-col">
+              <h3 class="text-[32px] font-medium">Hoodies & Sweetshirt</h3>
+              <a class="text-2xl text-[#7F7F7F]" href="#">Explore Now!</a>
+            </div>
+            <div>
+              <img src="/Frontend/images/arrow.png" alt="" srcset="" />
+            </div>
+          </div>
+        </div>
+        <!-- cards -->
+        <div class="flex flex-col w-full gap-7">
+          <img
+            class="w-full h-[704px] object-cover object-[34%] rounded-[20px]"
+            src="/Frontend/images/card2.jpg"
+          />
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-col">
+              <h3 class="text-[32px] font-medium">Coats & Parkas</h3>
+              <a class="text-2xl text-[#7F7F7F]" href="#">Explore Now!</a>
+            </div>
+            <div>
+              <img src="/Frontend/images/arrow.png" alt="" srcset="" />
+            </div>
+          </div>
+        </div>
+        <!-- cards -->
+        <div class="flex flex-col w-full gap-7">
+          <img
+            class="w-full h-[704px] object-cover object-[47%] rounded-[20px]"
+            src="/Frontend/images/card3.jpg"
+          />
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-col">
+              <h3 class="text-[32px] font-medium">Sweaters</h3>
+              <a class="text-2xl text-[#7F7F7F]" href="#">Explore Now!</a>
+            </div>
+            <div>
+              <img src="/Frontend/images/arrow.png" alt="" srcset="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Selling -->
+    <section
+      class="flex flex-col container items-start gap-16 my-[190px] mx-auto md:my-[300px]"
+    >
+      <div class="text-black">
+        <h2 class="text-4xl font-black sm:text-center">Everyone's Favourite</h2>
+      </div>
+      <div
+        class="grid grid-flow-row grid-row-1 gap-12 md:grid-flow-col md:grid-cols-2"
+      >
+        <!-- cards -->
+        <div class="flex flex-col gap-7">
+          <div class="">
+            <img
+              class="w-full h-[704px] object-cover object-[25%] rounded-[20px] sm:object-[40%]"
+              src="/Frontend/images/card4.jpg"
+            />
+          </div>
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-col">
+              <h3 class="text-[32px] font-medium">Best Selling</h3>
+              <a class="text-2xl text-[#7F7F7F]" href="#">Explore Now!</a>
+            </div>
+            <div>
+              <img src="/Frontend/images/arrow.png" alt="" srcset="" />
+            </div>
+          </div>
+        </div>
+        <!-- cards -->
+        <div class="flex flex-col gap-7">
+          <div class="h-[704px]">
+            <img
+              class="w-full h-[704px] object-cover object-[34%] rounded-[20px]"
+              src="/Frontend/images/card6.jpg"
+            />
+          </div>
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-col">
+              <h3 class="text-[32px] font-medium">All Under $40</h3>
+              <a class="text-2xl text-[#7F7F7F]" href="#">Explore Now!</a>
+            </div>
+            <div>
+              <img src="/Frontend//images/arrow.png" alt="" srcset="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offer -->
+    <h2 class="text-4xl font-black md:text-5xl text-center">Grab Offers</h2>
+    <section class="font-sans my-40 mx-14 md:mx-0">
+      <div class="px-4 md:px-0 max-w-6xl mx-auto -mt-32">
+        <div class="flex flex-wrap justify-between pt-12">
+          <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+            <!-- First Offer -->
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 shadow-md font-sans"
+            >
+              <div class="p-4">
+                <p>
+                  <span class="text-2xl md:text-4xl font-semibold"
+                    >Sweatshirt Offer</span
+                  >
+                  <span class="text-base md:text-xl text-red-500">-60%</span>
+                </p>
+                <h2 class="mt-3 md:mt-5 font-serif text-sm md:text-base">
+                  Get your wardrobe winter-ready with our exclusive sweatshirt
+                  discounts.
+                </h2>
+              </div>
+              <div class="p-4">
+                <div
+                  class="countdown flex mt-3 md:mt-4 text-md md:text-4xl font-bold text-slate-500"
+                >
+                  <span id="days">15 :&nbsp;</span>
+                  <span id="hours">21 :&nbsp;</span>
+                  <span id="minutes">46 :&nbsp;</span>
+                  <span id="seconds">08</span>
+                </div>
+                <a href="#" class="text-sm md:text-base">Get Only $39.00</a>
+              </div>
+              <div class="p-4">
+                <img
+                  src="/Frontend/images/Offer.jpg"
+                  class="h-full w-full md:w-32 rounded-t pb-10"
+                />
+              </div>
+            </div>
+            <!-- Second Offer -->
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 shadow-md font-sans"
+            >
+              <div class="p-4">
+                <p>
+                  <span class="text-2xl md:text-4xl font-semibold"
+                    >Jackets Offer</span
+                  >
+                  <span class="text-base md:text-xl text-red-500">-60%</span>
+                </p>
+                <h2 class="mt-3 md:mt-5 font-serif text-sm md:text-base">
+                  Get your wardrobe winter-ready with our exclusive sweatshirt
+                  discounts.
+                </h2>
+              </div>
+              <div class="p-4">
+                <div
+                  class="countdown flex mt-3 md:mt-4 text-md md:text-4xl font-bold text-slate-500"
+                >
+                  <span id="days">15 :&nbsp;</span>
+                  <span id="hours">21 :&nbsp;</span>
+                  <span id="minutes">46 :&nbsp;</span>
+                  <span id="seconds">08</span>
+                </div>
+                <a href="#" class="text-sm md:text-base">Get Only $39.00</a>
+              </div>
+              <div class="p-4">
+                <img
+                  src="/Frontend/images/offer1.jpg"
+                  class="h-full w-full md:w-32 rounded-t pb-10"
+                />
+              </div>
+            </div>
+            <!-- Third Offer -->
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 shadow-md font-sans"
+            >
+              <div class="p-4">
+                <p>
+                  <span class="text-2xl md:text-4xl font-semibold"
+                    >Coats Offer</span
+                  >
+                  <span class="text-base md:text-xl text-red-500">-60%</span>
+                </p>
+                <h2 class="mt-3 md:mt-5 font-serif text-sm md:text-base">
+                  Get your wardrobe winter-ready with our exclusive sweatshirt
+                  discounts.
+                </h2>
+              </div>
+              <div class="p-4">
+                <div
+                  class="countdown flex mt-3 md:mt-4 text-md md:text-4xl font-bold text-slate-500"
+                >
+                  <span id="days">15 :&nbsp;</span>
+                  <span id="hours">21 :&nbsp;</span>
+                  <span id="minutes">46 :&nbsp;</span>
+                  <span id="seconds">08</span>
+                </div>
+                <a href="#" class="text-sm md:text-base">Get Only $39.00</a>
+              </div>
+              <div class="p-4">
+                <img
+                  src="/Frontend/images/img.jpg"
+                  class="h-full w-full md:w-32 rounded-t pb-10"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script src="include.js"></script>
+  </body>
+</html>

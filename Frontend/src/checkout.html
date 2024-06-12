@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="cart.js"></script>
+    <script src="include.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        displayCartItemsOnCheckoutPage();
+      });
+    </script>
+    <title>CheckOut</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Body -->
+    <div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
+      <div class="px-4 pt-8">
+        <p class="text-2xl font-bold text-orange-500">
+          Order <span class="text-black">Summary</span>
+        </p>
+        <p class="text-gray-500">
+          Check your items. And select a suitable shipping method.
+        </p>
+        <div class="cartItems"></div>
+
+        <p class="mt-8 text-2xl font-medium text-orange-500">
+          Shipping <span class="text-black">Methods</span>
+        </p>
+        <form class="mt-5 grid gap-6">
+          <div class="relative">
+            <input
+              class="peer hidden"
+              id="radio_2"
+              type="radio"
+              name="radio"
+              checked
+            />
+            <span
+              class="peer-checked:border-orange-600 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"
+            ></span>
+            <label
+              class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+              for="radio_2"
+            >
+              <div class="ml-5">
+                <span class="mt-2 font-semibold">Cash On Delivery</span>
+                <p class="text-slate-500 text-sm leading-6">
+                  Delivery: 5-7 Working Days
+                </p>
+              </div>
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
+        <p class="text-2xl font-bold text-orange-500">
+          Payment <span class="text-black">Details</span>
+        </p>
+        <p class="text-gray-500">
+          Complete your order by providing your payment details.
+        </p>
+        <div class="space-y-6">
+          <label for="email" class="mt-4 mb-2 block text-md font-medium"
+            >Email</label
+          >
+          <div class="relative">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+              placeholder="your.email@gmail.com"
+            />
+          </div>
+
+          <label for="address" class="mt-4 mb-2 block text-md font-medium"
+            >Address</label
+          >
+          <div class="relative">
+            <input
+              type="text"
+              id="address"
+              name="address"
+              class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+              placeholder="your.city/area/street"
+            />
+          </div>
+          <!-- Total -->
+          <div class="mt-6 border-t border-b py-10">
+            <div class="flex items-center justify-between">
+              <p class="text-md font-medium text-gray-900">Subtotal</p>
+              <p class="font-semibold text-gray-900" id="Subtotal"></p>
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <p class="text-md font-medium text-gray-900">Shipping</p>
+              <p class="font-semibold text-gray-900" id="shipping">$8.00</p>
+            </div>
+          </div>
+          <div class="mt-6 flex items-center justify-between">
+            <p class="text-xl font-bold text-gray-900">Total</p>
+            <p class="text-2xl font-semibold text-gray-900" id="total"></p>
+          </div>
+        </div>
+
+        <!-- Order Button -->
+        <button
+          class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+          id="place-order-button"
+          onclick="handleSubmit(event)"
+        >
+          Place Order
+        </button>
+
+        <!-- Order Pop Up -->
+        <div
+          id="order-popup"
+          class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden"
+        >
+          <div
+            class="bg-gray-900 text-orange-500 rounded-lg shadow-lg relative max-w-lg w-full p-20"
+          >
+            <span
+              id="close-popup"
+              class="absolute top-2 right-2 text-2xl font-bold cursor-pointer"
+              >&times;</span
+            >
+            <div class="text-center">
+              <i
+                class="fa-solid fa-circle-check text-6xl text-orange-500 font-bold mx-10"
+              ></i>
+              <h2 class="text-2xl font-semibold p-10">
+                Order placed successfully
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Pop Up -->
+        <div
+          id="error-popup"
+          class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden"
+        >
+          <div
+            class="bg-gray-900 text-orange-500 rounded-lg shadow-lg relative max-w-lg w-full p-20"
+          >
+            <span
+              id="close-error"
+              class="absolute top-2 right-2 text-2xl font-bold cursor-pointer"
+              >&times;</span
+            >
+            <div class="text-center">
+              <i
+                class="fa-regular fa-circle-xmark text-6xl text-orange-500 font-bold mx-10"
+              ></i>
+              <h2 class="text-2xl font-semibold p-10">Invalid Inputs</h2>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+  <!--  ==================================================================
+                           VALIDATIONS
+        ================================================================== -->
+  <script>
+    // import axios from "axios";
+    function check(email) {
+      let parts = email.split("@");
+
+      // Admin can't place order
+      if (email === "adminishere524@gmail.com") {
+        return false;
+      }
+      // Check if there are exactly two parts
+      if (parts.length !== 2) {
+        return false;
+      }
+
+      // Check if username part is empty
+      if (parts[0] === "") {
+        return false;
+      }
+
+      // Validate username part
+      for (let i = 0; i < parts[0].length; i++) {
+        if (
+          !(
+            (parts[0][i] >= "a" && parts[0][i] <= "z") ||
+            (parts[0][i] >= "A" && parts[0][i] <= "Z") ||
+            (parts[0][i] >= "0" && parts[0][i] <= "9")
+          )
+        ) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    document
+      .getElementById("place-order-button")
+      .addEventListener("click", function () {
+        let email = document.getElementById("email").value;
+        let address = document.getElementById("address").value;
+
+        if (email === "" || address === "" || !check(email)) {
+          document.getElementById("error-popup").classList.remove("hidden");
+          document
+            .getElementById("close-error")
+            .addEventListener("click", function () {
+              document.getElementById("error-popup").classList.add("hidden");
+            });
+        } else {
+          document.getElementById("order-popup").classList.remove("hidden");
+          console.log(email, address);
+          document
+            .getElementById("close-popup")
+            .addEventListener("click", function () {
+              document.getElementById("order-popup").classList.add("hidden");
+            });
+        }
+      });
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      submitForm();
+    };
+
+    const submitForm = () => {
+      let email = document.getElementById("email").value;
+      let address = document.getElementById("address").value;
+      const Cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      for (const item of Cart) {
+        const obj = {
+          id: item.id,
+          title: item.title,
+          price: item.price,
+          quantity: item.quantity,
+          email: email,
+          address: address,
+        };
+      }
+    };
+  </script>
+</html>

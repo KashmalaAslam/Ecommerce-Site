@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a202c;
+            color: white;
+        }
+        .orange-button {
+            background-color: #f97316;
+        }
+        .orange-button:hover {
+            background-color: #ea580c;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Admin Page</h1>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-bold mb-4">Add Item</h2>
+            <form id="addItemForm" class="space-y-4">
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-300">Title</label>
+                    <input type="text" id="title" class="w-full p-2 border border-gray-700 rounded bg-gray-900 text-white">
+                </div>
+                <div>
+                    <label for="content" class="block text-sm font-medium text-gray-300">Content</label>
+                    <textarea id="content" class="w-full p-2 border border-gray-700 rounded bg-gray-900 text-white"></textarea>
+                </div>
+                <div>
+                    <label for="imageUrl" class="block text-sm font-medium text-gray-300">Image URL</label>
+                    <input type="text" id="imageUrl" class="w-full p-2 border border-gray-700 rounded bg-gray-900 text-white">
+                </div>
+                <div>
+                    <label for="price" class="block text-sm font-medium text-gray-300">Price</label>
+                    <input type="text" id="price" class="w-full p-2 border border-gray-700 rounded bg-gray-900 text-white">
+                </div>
+                <div>
+                    <label for="quantity" class="block text-sm font-medium text-gray-300">Quantity</label>
+                    <input type="number" id="quantity" class="w-full p-2 border border-gray-700 rounded bg-gray-900 text-white">
+                </div>
+                <button type="submit" class="orange-button text-white px-4 py-2 rounded">Add Item</button>
+            </form>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
+            <h2 class="text-xl font-bold mb-4">Items List</h2>
+            <ul id="itemsList" class="space-y-4">
+                <!-- Items will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addItemForm = document.getElementById('addItemForm');
+            const itemsList = document.getElementById('itemsList');
+
+            loadItems();
+
+            addItemForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const title = document.getElementById('title').value;
+                const content = document.getElementById('content').value;
+                const imageUrl = document.getElementById('imageUrl').value;
+                const price = document.getElementById('price').value;
+                const quantity = parseInt(document.getElementById('quantity').value);
+
+                if (title.trim() !== '' && content.trim() !== '' && imageUrl.trim() !== '' && price.trim() !== '' && !isNaN(quantity)) {
+                    const item = { title, content, imageUrl, price, quantity };
+                    addItem(item);
+                    document.getElementById('addItemForm').reset();
+                }
+            });
+
+            function loadItems() {
+                const items = JSON.parse(localStorage.getItem('items')) || [];
+                items.forEach(item => addItemToDOM(item));
+                // Update the frontend
+                updateFrontend(items);
+            }
+
+            function addItem(item) {
+                const items = JSON.parse(localStorage.getItem('items')) || [];
+                items.push(item);
+                localStorage.setItem('items', JSON.stringify(items));
+                addItemToDOM(item);
+                // Update the frontend
+                updateFrontend(items);
+            }
+
+            function addItemToDOM(item) {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center bg-gray-700 p-4 rounded-lg';
+                li.innerHTML = `
+                    <div>
+                        <h3 class="text-lg font-bold">${item.title}</h3>
+                        <p>${item.content}</p>
+                        <img src="${item.imageUrl}" alt="${item.title}" class="w-24 h-24 object-cover">
+                        <p>Price: ${item.price}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                    </div>
+                    <div>
+                        <button class="edit-button orange-button text-white px-3 py-1 rounded mr-2">Edit</button>
+                        <button class="delete-button bg-red-600 text-white px-3 py-1 rounded">Delete</button>
+                    </div>
+                `;
+                itemsList.appendChild(li);
+
+                const deleteButton = li.querySelector('.delete-button');
+                deleteButton.addEventListener('click', () => {
+                    deleteItem(item, li);
+                });
+
+                const editButton = li.querySelector('.edit-button');
+                editButton.addEventListener('click', () => {
+                    const newTitle = prompt('Enter new title:', item.title);
+                    const newContent = prompt('Enter new content:', item.content);
+                    const newImageUrl = prompt('Enter new image URL:', item.imageUrl);
+                    const newPrice = prompt('Enter new price:', item.price);
+                    const newQuantity = prompt('Enter new quantity:', item.quantity);
+
+                    if (newTitle !== null && newContent !== null && newImageUrl !== null && newPrice !== null && !isNaN(newQuantity)) {
+                        const newItem = { title: newTitle, content: newContent, imageUrl: newImageUrl, price: newPrice, quantity: parseInt(newQuantity) };
+                        editItem(item, newItem, li);
+                    }
+                });
+            }
+
+            function deleteItem(item, li) {
+                let items = JSON.parse(localStorage.getItem('items')) || [];
+                items = items.filter(i => i.title !== item.title);
+                localStorage.setItem('items', JSON.stringify(items));
+                itemsList.removeChild(li);
+                // Update the frontend
+                updateFrontend(items);
+            }
+
+            function editItem(oldItem, newItem, li) {
+                let items = JSON.parse(localStorage.getItem('items')) || [];
+                const index = items.findIndex(i => i.title === oldItem.title);
+                if (index > -1) {
+                    items[index] = newItem;
+                    localStorage.setItem('items', JSON.stringify(items));
+                    li.querySelector('h3').textContent = newItem.title;
+                    li.querySelector('p').textContent = newItem.content;
+                    li.querySelector('img').src = newItem.imageUrl;
+                    li.querySelector('img').alt = newItem.title;
+                    li.querySelector('p:nth-of-type(2)').textContent = `Price: ${newItem.price}`;
+                    li.querySelector('p:nth-of-type(3)').textContent = `Quantity: ${newItem.quantity}`;
+                    // Update the frontend
+                    updateFrontend(items);
+                }
+            }
+
+            // Function to update the frontend
+            function updateFrontend(items) {
+                // Assuming you have a div with id 'frontendItemsList' in your frontend
+                const frontendItemsList = document.getElementById('frontendItemsList');
+                if (frontendItemsList) {
+                    frontendItemsList.innerHTML = '';
+                    items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'bg-gray-700 p-4 rounded-lg mb-2';
+                        li.innerHTML = `
+                            <h3 class="text-lg font-bold">${item.title}</h3>
+                            <p>${item.content}</p>
+                            <img src="${item.imageUrl}" alt="${item.title}" class="w-24 h-24 object-cover">
+                            <p>Price: ${item.price}</p>
+                            <p>Quantity: ${item.quantity}</p>
+                        `;
+                        frontendItemsList.appendChild(li);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
